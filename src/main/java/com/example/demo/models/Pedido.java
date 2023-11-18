@@ -15,6 +15,6 @@ public class Pedido {
     private String nombre;
     private String fecha;
     //private Flux<Postre> postres;
-    private float precio;
+    private Float precio;
 
 }

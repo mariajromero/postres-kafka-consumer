@@ -35,5 +35,21 @@ public class PedidoService {
                 .switchIfEmpty(Mono.error( new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedidos no encontrados").getMostSpecificCause()));
 
     }
+    public String deleteById(Integer id){
+         pedidoRepository.deleteById(id).onErrorResume(throwable -> {logger.error("error al consultar un pedido con id "+id, throwable);
+                    return Mono.empty();
+                })
+                .switchIfEmpty(Mono.error( new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido con id "+id+"no encontrado").getMostSpecificCause()));
+        String respuesta="se borro el pedido con id"+id;
+        return respuesta;
+    }
+    public String deleteAll(){
+        pedidoRepository.deleteAll().onErrorResume(throwable -> {logger.error("error borrando pedidos " ,throwable);
+                    return Mono.empty();
+                })
+                .switchIfEmpty(Mono.error( new ResponseStatusException(HttpStatus.NOT_FOUND, "pedidos no encontrados").getMostSpecificCause()));
+        String respuesta="se borroaron los pedidos";
+        return respuesta;
+    }
 
 }
