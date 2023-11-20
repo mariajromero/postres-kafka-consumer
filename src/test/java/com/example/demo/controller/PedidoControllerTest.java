@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.models.Galleta;
 import com.example.demo.models.Pedido;
 import com.example.demo.service.PedidoService;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,8 +26,10 @@ public class PedidoControllerTest {
     }
     @Test
     void testGetPedidosOk(){
-        Pedido pedidoEsperado= new Pedido(123,"maria","11/09/2023", 1500.0F);
-        Pedido pedidoEsperado2= new Pedido(1234,"jose","11/09/2023", 1600.0F);
+        Galleta galleta=new Galleta();
+        galleta.setTieneGluten(false);
+        Pedido pedidoEsperado= new Pedido(123,"maria","11/09/2023", 1500.0F,galleta);
+        Pedido pedidoEsperado2= new Pedido(1234,"jose","11/09/2023", 1600.0F,galleta);
         Flux<Pedido> pedidosEsperados= Flux.just(pedidoEsperado,pedidoEsperado2);
         when(pedidoService.findAll()).thenReturn(pedidosEsperados);
         Flux<Pedido> resultado=pedidoController.getPedidos();
@@ -36,7 +39,9 @@ public class PedidoControllerTest {
     }
     @Test
     void testGetPedidoByIdOk(){
-        Pedido pedidoEsperado= new Pedido(123,"maria","11/09/2023", 1500.0F);
+        Galleta galleta=new Galleta();
+        galleta.setTieneGluten(false);
+        Pedido pedidoEsperado= new Pedido(123,"maria","11/09/2023", 1500.0F, galleta);
         Mono<Pedido> mono= Mono.just(pedidoEsperado);
         when(pedidoService.findById(any())).thenReturn(mono);
         Mono<Pedido> resultado=pedidoController.getPedidoById(123);

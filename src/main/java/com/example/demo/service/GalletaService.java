@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.models.Dona;
 import com.example.demo.models.Galleta;
 import com.example.demo.models.Pedido;
 import com.example.demo.repositories.GalletaRepository;
@@ -34,6 +35,12 @@ public class GalletaService {
                     return Mono.empty();
                 })
                 .switchIfEmpty(Mono.error( new ResponseStatusException(HttpStatus.NOT_FOUND, "galletas no encontrados").getMostSpecificCause()));
+
+    }
+    public Mono<String> calcularDescuento(Integer serial){
+        Galleta galleta=galletaRepository.findById(serial).block();
+        String resultado= "el precio con descuento es "+ galleta.aplicarDescuento(galleta.getPrecio());
+        return Mono.just(resultado);
 
     }
 

@@ -30,11 +30,11 @@ public class PedidoController {
         return pedidoService.findById(id);
     }
     @GetMapping("/delete")
-    public String deletePedidoById(Integer id){
+    public Mono<Pedido> deletePedidoById(Integer id){
         return pedidoService.deleteById(id);
     }
     @GetMapping("/deleteAll")
-    public String deletePedidos(){
+    public Mono<Void> deletePedidos(){
         return pedidoService.deleteAll();
     }
 
