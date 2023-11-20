@@ -8,8 +8,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 public class PedidoControllerTest {
@@ -23,8 +25,8 @@ public class PedidoControllerTest {
     }
     @Test
     void testGetPedidosOk(){
-        Pedido pedidoEsperado= new Pedido(123,1500);
-        Pedido pedidoEsperado2= new Pedido(1234,1600);
+        Pedido pedidoEsperado= new Pedido(123,"maria","11/09/2023", 1500.0F);
+        Pedido pedidoEsperado2= new Pedido(1234,"jose","11/09/2023", 1600.0F);
         Flux<Pedido> pedidosEsperados= Flux.just(pedidoEsperado,pedidoEsperado2);
         when(pedidoService.findAll()).thenReturn(pedidosEsperados);
         Flux<Pedido> resultado=pedidoController.getPedidos();
@@ -32,4 +34,15 @@ public class PedidoControllerTest {
         assertEquals(pedidosEsperados,resultado);
 
     }
+    @Test
+    void testGetPedidoByIdOk(){
+        Pedido pedidoEsperado= new Pedido(123,"maria","11/09/2023", 1500.0F);
+        Mono<Pedido> mono= Mono.just(pedidoEsperado);
+        when(pedidoService.findById(any())).thenReturn(mono);
+        Mono<Pedido> resultado=pedidoController.getPedidoById(123);
+        resultado.subscribe();
+        assertEquals(mono,resultado);
+
+    }
+
 }

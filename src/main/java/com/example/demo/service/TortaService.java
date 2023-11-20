@@ -1,8 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.models.Pedido;
 import com.example.demo.models.Torta;
-import com.example.demo.repositories.PedidoRepository;
 import com.example.demo.repositories.TortaRepository;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

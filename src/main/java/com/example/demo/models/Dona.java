@@ -8,11 +8,13 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Postre {
+public class Dona {
     @Id
     private Integer serial;
-    private String tipo;
-    private double precio;
+    private String sabor;
+    private Float precio;
+    private boolean conRelleno;
+
 
 
 }

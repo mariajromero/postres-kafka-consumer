@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
-
+@AllArgsConstructor
 @Getter
 @Setter
 public class Galleta {
@@ -14,6 +14,7 @@ public class Galleta {
     private String sabor;
     private String tamaño;
     private boolean tieneGluten;
+    private Float precio;
 
 
 }
