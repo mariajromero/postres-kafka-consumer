@@ -49,5 +49,35 @@ public class PedidoControllerTest {
         assertEquals(mono,resultado);
 
     }
+    @Test
+    void borrarOk(){
+        Mono<Void> mono=Mono.empty();
+        when(pedidoService.deleteAll()).thenReturn(mono);
+        Mono<Void> resultado=pedidoController.deletePedidos();
+        resultado.subscribe();
+        assertEquals(mono,resultado);
+    }
+    @Test
+    void borrarByIdOk(){
+        Galleta galleta=new Galleta();
+        Pedido pedidoEsperado= new Pedido(123,"maria","11/09/2023", 1500.0F, galleta);
+        Mono<Pedido> mono= Mono.just(pedidoEsperado);
+        when(pedidoService.deleteById(any())).thenReturn(mono);
+        Mono<Pedido> resultado=pedidoController.deletePedidoById(123);
+        resultado.subscribe();
+        assertEquals(mono,resultado);
+    }
+    @Test
+    void updateOk(){
+        Galleta galleta=new Galleta();
+        Pedido pedido= new Pedido(123,"maria","11/09/2023", 1500.0F, galleta);
+        Mono<Pedido> mono= Mono.just(pedido);
+        when(pedidoService.update(any())).thenReturn(mono);
+        Mono<Pedido> resultado=pedidoController.updatePedido(pedido);
+        resultado.subscribe();
+        Pedido nuevo=resultado.block();
+        assertEquals(pedido.getNombre(),nuevo.getNombre());
+
+    }
 
 }

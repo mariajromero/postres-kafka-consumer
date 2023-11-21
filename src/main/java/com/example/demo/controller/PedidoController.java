@@ -18,7 +18,7 @@ public class PedidoController {
     }
     @PostMapping("/update")
     public Mono<Pedido> updatePedido(@RequestBody Pedido pedido) {
-        return pedidoService.save(pedido);
+        return pedidoService.update(pedido);
     }
 
     @GetMapping("/")
