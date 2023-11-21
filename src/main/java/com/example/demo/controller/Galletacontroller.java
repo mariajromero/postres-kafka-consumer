@@ -27,8 +27,5 @@ public class Galletacontroller {
     public Mono<Galleta> getGalletaById(Integer id){
         return galletaService.findById(id);
     }
-    @GetMapping("/descuento")
-    public Mono<String> calcularPrecioFinal(Integer id){
-        return galletaService.calcularDescuento(id);
-    }
+
 }

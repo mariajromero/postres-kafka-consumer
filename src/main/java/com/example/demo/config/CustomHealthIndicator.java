@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class CustomHealthIndicator extends AbstractHealthIndicator {
     @Override
     protected void doHealthCheck(Health.Builder builder) throws Exception{
-        builder.up().withDetail("paso", "Paso 2");
+        builder.up().withDetail("api ok", "api ok");
     }
 
 }

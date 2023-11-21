@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Torta {
+public class Torta implements ISabores{
     @Id
     private Integer serial;
     private String sabor;
@@ -16,4 +16,8 @@ public class Torta {
     private boolean conCrema;
 
 
+    @Override
+    public String agregarOtroSabor() {
+        return this.sabor+" con chocolate";
+    }
 }

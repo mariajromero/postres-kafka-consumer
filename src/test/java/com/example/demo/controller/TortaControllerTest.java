@@ -39,7 +39,7 @@ public class TortaControllerTest {
         Torta t2=new Torta(123,"fresa","pequeño",false);
         Mono<Torta> tortas= Mono.just(t2);
         when(tortaService.findById(any())).thenReturn(tortas);
-        Flux<Torta> resultado=tortaController.getTortas();
+        Mono<Torta> resultado=tortaController.getTortaById(123);
         resultado.subscribe();
         assertEquals(tortas,resultado);
     }

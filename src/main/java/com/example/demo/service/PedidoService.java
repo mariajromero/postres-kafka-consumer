@@ -27,6 +27,15 @@ public class PedidoService {
         return pedidoRepository.save(pedido);
 
     }
+    public Mono<Pedido> update(Pedido pedido){
+        return pedidoRepository.findById(pedido.getSerial())
+                .flatMap(pedido1 -> pedidoRepository.save(pedido).thenReturn(pedido))
+                .onErrorResume(throwable -> {logger.error("error al consultar  pedido  ", throwable);
+                    return Mono.empty();
+                })
+                .switchIfEmpty(Mono.error( new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido no encontrado").getMostSpecificCause()));
+    }
+
     public Mono<DTOPedidoEntrada> crearPedido(DTOPedidoEntrada dtoPedidoEntrada){
         Galleta galleta=new Galleta();
         galleta.setPrecio(dtoPedidoEntrada.precio());
