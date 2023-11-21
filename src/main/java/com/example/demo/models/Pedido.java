@@ -24,7 +24,7 @@ public class Pedido {
     private Float precioConDescuento;
     @OneToOne
     @MapsId
-    @JoinColumn(name="id")
+    @JoinColumn(name="serial")
     private Galleta galleta;
 
 }

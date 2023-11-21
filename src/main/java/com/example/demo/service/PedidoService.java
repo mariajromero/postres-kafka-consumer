@@ -40,7 +40,7 @@ public class PedidoService {
         Galleta galleta=new Galleta();
         galleta.setPrecio(dtoPedidoEntrada.precio());
         galleta.setSabor(dtoPedidoEntrada.sabor());
-        galleta.setTamaño(dtoPedidoEntrada.tamaño());
+        galleta.setTamano(dtoPedidoEntrada.tamaño());
         galleta.setTieneGluten(dtoPedidoEntrada.tieneGluten());
         Pedido pedido=new Pedido();
         pedido.setFecha(dtoPedidoEntrada.fecha());
@@ -56,7 +56,7 @@ public class PedidoService {
                             pedidoCreado.getFecha(),
                             pedidoCreado.getPrecioConDescuento(),
                             galletaCreada.getSabor(),
-                            galletaCreada.getTamaño(),
+                            galletaCreada.getTamano(),
                             galletaCreada.isTieneGluten(),
                             galletaCreada.getPrecio()
                     );

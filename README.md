@@ -21,4 +21,6 @@ Las galletas a su vez tienen las siguientes caracteristicas:
 Ademas, se tienen 2 interfaces que se pueden aplicar a todos los postres
 IDescuento y ISabores las cuales sirven para aplicar un descuento al precio del postre y para adicionar un segundo sabor. 
 
+![img.png](img.png)
+
 

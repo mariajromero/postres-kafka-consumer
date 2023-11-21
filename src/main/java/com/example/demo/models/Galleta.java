@@ -18,14 +18,14 @@ import org.springframework.data.annotation.Id;
 public class Galleta implements IDescuento{
     @Id
     @jakarta.persistence.Id
-    private Integer id;
+    private Integer serial;
     private String sabor;
-    private String tamaño;
+    private String tamano;
     private boolean tieneGluten;
     private Float precio;
 
-    @OneToOne(mappedBy = "galleta")
-    private Pedido pedido;
+    //@OneToOne(mappedBy = "galleta")
+    //private Pedido pedido;
     @Override
     public Float aplicarDescuento(Float precio) {
 

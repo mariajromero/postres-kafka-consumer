@@ -28,8 +28,8 @@ public class GalletaControllerTest {
     @Test
     void getGalletasOk()
     {
-        Galleta g1= new Galleta(123,"vainilla","grande",true,1500.0F, new Pedido());
-        Galleta g2= new Galleta(123,"vainilla","grande",false,1500.0F, new Pedido());
+        Galleta g1= new Galleta(123,"vainilla","grande",true,1500.0F);
+        Galleta g2= new Galleta(123,"vainilla","grande",false,1500.0F);
         Flux<Galleta> galletas=Flux.just(g1,g2);
         when(galletaService.findAll()).thenReturn(galletas);
         Flux<Galleta> resultado=galletacontroller.getGalletas();
@@ -38,7 +38,7 @@ public class GalletaControllerTest {
     }
     @Test
     void getGalletaByIdOk(){
-        Galleta g1= new Galleta(123,"vainilla","grande",true,1500.0F, new Pedido());
+        Galleta g1= new Galleta(123,"vainilla","grande",true,1500.0F);
         Mono<Galleta> galletas=Mono.just(g1);
         when(galletaService.findById(any())).thenReturn(galletas);
         Mono<Galleta> resultado=galletacontroller.getGalletaById(123);
