@@ -16,7 +16,7 @@ public class PedidoController {
     public Mono<Pedido> crearPedido(@RequestBody Pedido pedido) {
         return pedidoService.save(pedido);
     }
-    @PostMapping("/update")
+    @PutMapping("/update")
     public Mono<Pedido> updatePedido(@RequestBody Pedido pedido) {
         return pedidoService.update(pedido);
     }
@@ -25,12 +25,12 @@ public class PedidoController {
     public Flux<Pedido> getPedidos(){
         return pedidoService.findAll();
     }
-    @GetMapping("/pedido")
-    public Mono<Pedido> getPedidoById(Integer id){
+    @GetMapping("/pedido/{id}")
+    public Mono<Pedido> getPedidoById(@PathVariable("id") Integer id){
         return pedidoService.findById(id);
     }
-    @GetMapping("/delete")
-    public Mono<Pedido> deletePedidoById(Integer id){
+    @GetMapping("/delete/{id}")
+    public Mono<Pedido> deletePedidoById(@PathVariable("id")Integer id){
         return pedidoService.deleteById(id);
     }
     @GetMapping("/deleteAll")

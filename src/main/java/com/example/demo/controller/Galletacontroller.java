@@ -23,8 +23,8 @@ public class Galletacontroller {
     public Flux<Galleta> getGalletas(){
         return galletaService.findAll();
     }
-    @GetMapping("/galleta")
-    public Mono<Galleta> getGalletaById(Integer id){
+    @GetMapping("/galleta/{id}")
+    public Mono<Galleta> getGalletaById(@PathVariable("id") Integer id){
         return galletaService.findById(id);
     }
 

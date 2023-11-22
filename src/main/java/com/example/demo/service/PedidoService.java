@@ -35,36 +35,6 @@ public class PedidoService {
                 })
                 .switchIfEmpty(Mono.error( new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido no encontrado").getMostSpecificCause()));
     }
-
-    public Mono<DTOPedidoEntrada> crearPedido(DTOPedidoEntrada dtoPedidoEntrada){
-        Galleta galleta=new Galleta();
-        galleta.setPrecio(dtoPedidoEntrada.precio());
-        galleta.setSabor(dtoPedidoEntrada.sabor());
-        galleta.setTamano(dtoPedidoEntrada.tamaño());
-        galleta.setTieneGluten(dtoPedidoEntrada.tieneGluten());
-        Pedido pedido=new Pedido();
-        pedido.setFecha(dtoPedidoEntrada.fecha());
-        pedido.setNombre(dtoPedidoEntrada.nombre());
-        pedido.setPrecioConDescuento(galleta.aplicarDescuento(galleta.getPrecio()));
-        pedido.setGalleta(galleta);
-        return Mono.zip(galletaRepository.save(galleta),
-                pedidoRepository.save(pedido)).map(tupla->{
-                    Pedido pedidoCreado=tupla.getT2();
-                    Galleta galletaCreada=tupla.getT1();
-                    return  new DTOPedidoEntrada(pedidoCreado.getSerial(),
-                            pedidoCreado.getNombre(),
-                            pedidoCreado.getFecha(),
-                            pedidoCreado.getPrecioConDescuento(),
-                            galletaCreada.getSabor(),
-                            galletaCreada.getTamano(),
-                            galletaCreada.isTieneGluten(),
-                            galletaCreada.getPrecio()
-                    );
-        });
-
-
-
-    }
     public Mono<Pedido> findById(Integer id){
         return pedidoRepository.findById(id).onErrorResume(throwable -> {logger.error("error al consultar un pedido con id "+id, throwable);
         return Mono.empty();

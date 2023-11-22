@@ -23,8 +23,8 @@ public class DonaController {
     public Flux<Dona> getDonas(){
         return donaService.findAll();
     }
-    @GetMapping("/dona")
-    public Mono<Dona> getDonaById(Integer id){
+    @GetMapping("/dona/{id}")
+    public Mono<Dona> getDonaById(@PathVariable("id")Integer id){
         return donaService.findById(id);
     }
 

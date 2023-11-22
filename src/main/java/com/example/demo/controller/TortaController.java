@@ -23,8 +23,8 @@ public class TortaController {
     public Flux<Torta> getTortas(){
         return tortaService.findAll();
     }
-    @GetMapping("/torta")
-    public Mono<Torta> getTortaById(Integer id){
+    @GetMapping("/torta/{id}")
+    public Mono<Torta> getTortaById(@PathVariable("id") Integer id){
         return tortaService.findById(id);
     }
 }

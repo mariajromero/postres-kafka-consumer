@@ -13,18 +13,14 @@ import reactor.core.publisher.Flux;
 @Getter
 @Setter
 @Entity
-@Table(name="pedidos")
+@Table(name="pedido")
 public class Pedido {
     @Id
     @jakarta.persistence.Id
     private Integer serial;
     private String nombre;
     private String fecha;
-    //private Flux<Postre> postres;
     private Float precioConDescuento;
-    @OneToOne
-    @MapsId
-    @JoinColumn(name="serial")
-    private Galleta galleta;
+
 
 }
