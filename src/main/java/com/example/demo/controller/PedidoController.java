@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.models.Pedido;
 import com.example.demo.service.PedidoService;
+import com.example.demo.service.PostresServiceKafkaConsumer;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -12,6 +13,13 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 public class PedidoController {
     private PedidoService pedidoService;
+
+    private PostresServiceKafkaConsumer postresServiceKafkaConsumer;
+    @GetMapping("v2/topico-kafka/{topico}")
+    public Mono<String> obtenerPedidosKafka(@PathVariable String topico) {
+        return Mono.just(postresServiceKafkaConsumer.obtenerPedidoKafka(topico));
+    }
+
     @PostMapping("/")
     public Mono<Pedido> crearPedido(@RequestBody Pedido pedido) {
         return pedidoService.save(pedido);
