@@ -27,6 +27,17 @@ public class PedidoService {
         return pedidoRepository.save(pedido);
 
     }
+    public Mono<String> saveAll(Flux<Pedido> pedido){
+        return pedidoRepository.saveAll(pedido)
+                .then(Mono.just("pedidos creados"))
+                .onErrorResume(throwable -> {
+                    logger.error("error al guardar  pedidos  ", throwable);
+                    return Mono.empty();
+                })
+                .switchIfEmpty(Mono.error( new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "no se guardo").getMostSpecificCause()));
+
+    }
     public Mono<Pedido> update(Pedido pedido){
         return pedidoRepository.findById(pedido.getSerial())
                 .flatMap(pedido1 -> pedidoRepository.save(pedido).thenReturn(pedido))

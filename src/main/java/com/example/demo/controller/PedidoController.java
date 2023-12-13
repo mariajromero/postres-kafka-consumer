@@ -16,8 +16,13 @@ public class PedidoController {
 
     private PostresServiceKafkaConsumer postresServiceKafkaConsumer;
     @GetMapping("v2/topico-kafka/{topico}")
-    public Mono<String> obtenerPedidosKafka(@PathVariable String topico) {
+    public Mono<String> obtenerPedidoKafka(@PathVariable String topico) {
         return Mono.just(postresServiceKafkaConsumer.obtenerPedidoKafka(topico));
+    }
+    @GetMapping("v3/topico-kafka/{topico}")
+    public Mono<String> obtenerPedidosKafka(@PathVariable String topico) {
+        Flux<Pedido> pedidos=postresServiceKafkaConsumer.obtenerPedidosDesdeKafka(topico);
+        return pedidoService.saveAll(pedidos);
     }
 
     @PostMapping("/")

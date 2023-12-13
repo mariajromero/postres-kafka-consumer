@@ -21,6 +21,9 @@ public class Pedido {
     private String nombre;
     private String fecha;
     private Float precioConDescuento;
-
+public static Pedido StringToPedido(String pedidoString){
+    Pedido pedido=new Pedido();
+    return pedido;
+}
 
 }
