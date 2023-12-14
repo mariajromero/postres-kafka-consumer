@@ -22,7 +22,11 @@ public class Pedido {
     private String fecha;
     private Float precioConDescuento;
 public static Pedido StringToPedido(String pedidoString){
+
     Pedido pedido=new Pedido();
+    pedido.setNombre(pedidoString.split(", nombre='")[1].split("', fecha='")[0]);
+    pedido.setFecha(pedidoString.split(", fecha='")[1].split(", precioConDescuento")[0].replace("'", "") );
+    pedido.setPrecioConDescuento(Float.parseFloat(pedidoString.split("precioConDescuento=")[1].split("}")[0]));
     return pedido;
 }
 
